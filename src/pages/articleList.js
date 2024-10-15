@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import ArticleCard from "../components/ArticleCard/articleCard";
 
 // - Filtrage des papiers (Tous / Lus / Non lus)
 // - Recherche simple par titre ou auteur - pas eu le temps
@@ -8,11 +9,17 @@ import { useState } from "react";
 function ArticleList({ articles }) {
 	const [filter, setFilter] = useState("all");
 
+	// protection si pas d'articles
+	if (!articles) {
+		return <div>No articles available</div>;
+	  }
+
 	const filteredArticles = articles.filter((article) => {
 		const isRead = localStorage.getItem(`isRead-${article.key}`) === "true";
 		if (filter === "all") return true;
 		if (filter === "read") return isRead;
 		if (filter === "unread") return !isRead;
+		return false;
 	});
 
 	return (

@@ -9,7 +9,8 @@ import { useEffect, useState } from "react";
 // - Un indicateur pour marquer comme "lu"
 // - Un champ pour ajouter un bref commentaire
 
-function articleCard({ article }) {
+function ArticleCard({ article }) {
+	// renvoie true sur la chaine de caractere dans localstorage est true, sinon false et donc null
 	const [isRead, setIsRead] = useState(
 		localStorage.getItem(`isRead-${article.key}`) === "true"
 	);
@@ -18,8 +19,8 @@ function articleCard({ article }) {
 	);
 
 	useEffect(() => {
-		localStorage.setItem(`isRead-${article.key}`);
-		localStorage.setItem(`isRead-${article.key}`);
+		localStorage.setItem(`isRead-${article.key}`, isRead);
+		localStorage.setItem(`isRead-${article.key}`, comment);
 	}, [isRead, comment, article.key]);
 
 	return (
@@ -44,4 +45,4 @@ function articleCard({ article }) {
 	);
 }
 
-export default articleCard;
+export default ArticleCard;
